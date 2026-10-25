@@ -1,0 +1,101 @@
+# A deny-by-default Kortix project.
+#
+# Three specialist agents, each granted only what its job needs, plus the
+# project-wide approval policy. Read this file with the agent files beside it:
+# in a v2 manifest behavior (prompt, model, permission) lives in agents/<name>.md
+# and governance (connectors, secrets, apps, kortix_permissions, skills, tools)
+# lives here.
+#
+# Grants are deny-by-default: an agent with no connectors, secrets, apps or
+# kortix_permissions key gets none of them. Two keys differ, and both are named
+# explicitly below for every agent:
+#   - an omitted `tools` key grants every tool
+#   - an omitted `skills` key leaves skill access to the agent file's own rule
+kortix_version: 2
+
+default_agent: ops-readout
+
+project:
+  name: agentic-os-starter
+  description: A minimal governed Kortix project, for a security review of an agentic operating system.
+
+env:
+  required: []
+  optional: [HELPDESK_API_KEY, REPORT_SLACK_WEBHOOK]
+
+# Tools every agent of the project gets, unless its own `tools:` grant narrows
+# it. `kortix:<name>` is a tool Kortix maintains.
+tools:
+  web_search: kortix:web_search
+  scrape_webpage: kortix:scrape_webpage
+  memory: kortix:memory
+  show: kortix:show
+
+agents:
+  # Reporting agent: reads two connectors, writes a file, runs on a schedule.
+  ops-readout:
+    file: agents/ops-readout.md
+    connectors: [billing, warehouse]
+    secrets: [REPORT_SLACK_WEBHOOK]
+    skills: [kortix-cli]
+    kortix_permissions:
+      - project.session.read
+      - project.file.read
+      - project.file.write
+      - project.review.submit
+    tools: [read, write, web_search, memory, show]
+
+  # Triage agent: one connector, and its write action waits for a person.
+  support-triage:
+    file: agents/support-triage.md
+    connectors: [helpdesk]
+    secrets: [HELPDESK_API_KEY]
+    skills: [kortix-cli]
+    kortix_permissions:
+      - project.session.read
+      - project.review.submit
+    tools: [read, grep, web_search, scrape_webpage, memory]
+
+  # Read-only agent: no connectors, no secrets, no merge, no writes.
+  release-check:
+    file: agents/release-check.md
+    connectors: none
+    secrets: none
+    kortix_permissions:
+      - project.session.read
+      - project.gitops.read
+    tools: [read, grep, list, bash]
+
+# Project-wide policy. The default mode is allow_all, which runs every action
+# a grant allows; `risk` runs reads and holds writes and destructive calls for
+# a person. Set it to risk in any project whose agents touch money, mail,
+# tickets or production, then narrow the few actions that must run unattended
+# with an explicit rule.
+policy:
+  default_mode: risk
+
+# A held call expires after 24 hours by default; this project shortens the
+# window to four hours. An unattended job never waits on an approval: give it
+# an always_run rule for the exact action instead.
+approvals:
+  ttl: 4h
+
+# Project-wide rules win over a connector's own rules and over its sensitive
+# flag. Patterns are fully qualified. `always_run` is Allow, `require_approval`
+# is Ask, `block` is Block.
+policies:
+  # Reads never wait, in any connector.
+  - match: "*.*get*"
+    action: always_run
+  - match: "*.*list*"
+    action: always_run
+  - match: "*.*search*"
+    action: always_run
+  # Money moving back out needs a person, whatever the connector says.
+  - match: "*.*refund*"
+    action: require_approval
+  - match: "*.*payment*"
+    action: require_approval
+  # Deleting a record is a decision, not a step.
+  - match: "*.*delete*"
+    action: block
