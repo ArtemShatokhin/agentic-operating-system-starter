@@ -95,6 +95,9 @@ system differs from an orchestration platform](https://agenticoperatingsystemgui
 puts the two side by side, and [what a security reviewer checks](https://agenticoperatingsystemguide.com/agentic-operating-system-permissions-and-approvals)
 walks the files in this repo against a review. [Self-hosting](https://agenticoperatingsystemguide.com/self-hosted-agentic-operating-system)
 covers running the same manifest on your own network.
+
+## Docs and source
+
 - [Kortix docs: agents and permissions](https://kortix.com/docs/project/agents)
 - [Kortix docs: connectors, policies and approvals](https://kortix.com/docs/connect/connectors)
 - [Kortix on GitHub](https://github.com/kortix-ai/suna)
