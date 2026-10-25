@@ -86,11 +86,15 @@ this repo: it prints the list the platform enforces, so a name is checked rather
 4. **Where is the record?** The audit log, which keeps `domain.resource.verb`, the actor and the
    credential for every action. See `docs/security-review-checklist.md` for its limits.
 
-## Links
+## Where to read more
 
-- [What an agentic operating system is](https://agenticoperatingsystemguide.com/what-is-an-agentic-operating-system)
-- [What a security reviewer checks](https://agenticoperatingsystemguide.com/agentic-operating-system-permissions-and-approvals)
-- [Self-hosting the same manifest](https://agenticoperatingsystemguide.com/self-hosted-agentic-operating-system)
+If the name is still the question, [what an agentic operating system is](https://agenticoperatingsystemguide.com/what-is-an-agentic-operating-system)
+settles it; the short form, [agentic OS](https://agenticoperatingsystemguide.com/agentic-os), covers the same ground for the
+abbreviation people search. If you are weighing this against a workflow tool, [how an agentic operating
+system differs from an orchestration platform](https://agenticoperatingsystemguide.com/agentic-operating-system-vs-orchestration-platforms)
+puts the two side by side, and [what a security reviewer checks](https://agenticoperatingsystemguide.com/agentic-operating-system-permissions-and-approvals)
+walks the files in this repo against a review. [Self-hosting](https://agenticoperatingsystemguide.com/self-hosted-agentic-operating-system)
+covers running the same manifest on your own network.
 - [Kortix docs: agents and permissions](https://kortix.com/docs/project/agents)
 - [Kortix docs: connectors, policies and approvals](https://kortix.com/docs/connect/connectors)
 - [Kortix on GitHub](https://github.com/kortix-ai/suna)
