@@ -3,7 +3,7 @@
 An agent is two halves. Behavior (prompt, model, mode, `permission` rules for its tools) lives in
 `agents/<name>.md`. Governance (connectors, secrets, apps, skills, Kortix permissions, tools) lives in
 the `agents.<name>` block in `kortix.yaml`. In a v2 project the block rejects a behavior key; the
-manifest is the grant, the file is the job.
+manifest is the grant, the file is the job. The governance half is the part this repo ships; [the definition, with the five jobs the layer does for an agent](https://agenticoperatingsystemguide.com/what-is-an-agentic-operating-system) covers the whole layer.
 
 ## The six grants
 
@@ -61,7 +61,7 @@ to them or their groups; a project member may run the agents assigned to them or
 person with no agent grant gets a 403 when a session starts.
 
 Two grants therefore line up before an agent works for someone: the agent's grant decides what it may
-reach, and the person's grant decides whether they can start it.
+reach, and the person's grant decides whether they can start it. That second grant only matters once more than one person works in the project, and [how the setup holds up when a second person joins](https://agenticoperatingsystemguide.com/agentic-os) lists what breaks first.
 
 ## Reading a denial
 
