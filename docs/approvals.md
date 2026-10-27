@@ -11,7 +11,7 @@ A policy decides what happens when a connector action is called: Allow (`always_
    destructive calls.
 
 `allow_all` is the default, which is why a fresh project runs every action its grants allow. Set
-`policy.default_mode: risk` in any project whose agents touch money, mail, tickets or production.
+`policy.default_mode: risk` in any project whose agents touch money, mail, tickets or production. These rules travel with the project, and [the three questions that settle which of the two you need](https://agenticoperatingsystemguide.com/agentic-operating-system-vs-orchestration-platforms) put a committed policy beside a platform that decides which agent runs next.
 
 This project's rules hold every payment and every refund for a person, and block every delete, whatever a
 connector answers:
