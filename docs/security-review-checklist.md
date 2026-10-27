@@ -1,7 +1,7 @@
 # Security review checklist for an open-source agentic operating system
 
 Answer these before the demo, with the file or the screen that answers each one. The order is the order a
-reviewer asks them.
+reviewer asks them. [The four questions a review answers from one manifest](https://agenticoperatingsystemguide.com/agentic-operating-system-permissions-and-approvals) walks the same order against a committed `kortix.yaml`.
 
 ## 1. What may each agent touch?
 
