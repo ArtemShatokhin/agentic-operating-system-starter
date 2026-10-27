@@ -2,7 +2,7 @@
 
 The manifest, the change-request path and the audit log travel with the instance. Self-hosting moves where
 the control plane and the sessions run; it does not change the grant model or the approval model, which are
-the parts a review reads.
+the parts a review reads. What does change sits on the host, and [the reachability mode that decides whether sessions start](https://agenticoperatingsystemguide.com/self-hosted-agentic-operating-system) is the first setting to settle.
 
 - **The same `kortix.yaml`.** This repo is the project. Check it out on the instance and it behaves as it
   did in the cloud: the same agent blocks, the same `permissions`, the same `policies`.
